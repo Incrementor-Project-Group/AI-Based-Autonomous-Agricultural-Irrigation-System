@@ -1,2 +1,3 @@
 venv
-gui/secret.json
+secret.json
+gui\__pycache__
