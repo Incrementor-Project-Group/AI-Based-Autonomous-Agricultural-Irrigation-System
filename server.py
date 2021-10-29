@@ -1,12 +1,6 @@
 # Server-Side that receives json packets from client over the network using port 5000. Then it saves the json packet to a file with the filename of current time.
-
 import socket
 import json
-import sys
-import os
-import time
-import threading
-import queue
 import random
 import string
 

@@ -6,7 +6,6 @@ import random
 import time
 
 
-# Generate random json packet
 def generate_json_packet():
     # Generate random json packet with hashed data bits
     return {
@@ -18,7 +17,6 @@ def generate_json_packet():
 
 # Send json packet to server
 def send_json_packet(sock, json_packet):
-    # Send json packet to server
     sock.send(json.dumps(json_packet).encode())
 
 
@@ -27,9 +25,7 @@ port = "5000"
 
 
 if __name__ == "__main__":
-
     while True:
-
         # Create socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Connect to server
