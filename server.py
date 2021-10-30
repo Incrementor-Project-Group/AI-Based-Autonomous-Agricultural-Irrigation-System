@@ -1,59 +1,56 @@
-# Server-Side that receives json packets from client over the network using port 5000. Then it saves the json packet to a file with the filename of current time.
-import socket
-import json
+"""
+Server-Side that receives json packets from client over the network using port
+5000. Then it saves the json packet to a file with the filename of current time.
+"""
 import random
 import string
+import json
+from socketserver import StreamRequestHandler, TCPServer
 
 
-# Create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+def save_json(data: bytes):
+    """Saves json packets to file and name it with id"""
+    filename = ''.join(
+        random.choice(string.digits)
+        for _ in range(3)
+    ) + '.json'
+    with open(filename, 'wb') as f:
+        f.write(data)
+    print('saved to', filename)
 
 
-# Bind the socket to the port
-server_address = ('localhost', 5000)
-print('starting up on {} port {}'.format(*server_address))
-sock.bind(server_address)
+def parse_json_message(raw_data: bytes):  # -> Dict[str, Any]
+    """Parse raw data from socket into json object"""
+    return json.loads(raw_data.decode())
 
 
-# Listen for incoming connections
-sock.listen(1)
+class DumpHandler(StreamRequestHandler):
+    def handle(self):
+        """receive json packets from client"""
+        print('connection from {}:{}'.format(*self.client_address))
+        try:
+            while True:
+                data = self.rfile.readline()
+                if not data:
+                    break
+                print('received', data.decode().rstrip())
+                save_json(data)
+                # print 'received', parse_json_message(data)
+                print(parse_json_message(data))
+        finally:
+            print('disconnected from {}:{}'.format(*self.client_address))
 
 
-# Function to receive json packets from client
-def receive_json(conn):
-    data = conn.recv(1024)
-    data = data.decode('utf-8')
-    data = json.loads(data)
-    return data
-
-
-# Saves json packets to file and name it with id
-
-
-def save_json(data):
-    filename = ''.join(random.choice(
-        string.digits) for _ in range(3))
-    filename = filename + '.json'
-    with open(filename, 'w') as f:
-        json.dump(data, f)
+def main():
+    server_address = ('localhost', 5000)
+    print('starting up on {}:{}'.format(*server_address))
+    with TCPServer(server_address, DumpHandler) as server:
+        print('waiting for a connection')
+        server.serve_forever()
 
 
 if __name__ == '__main__':
-    while True:
-        # Wait for a connection
-        print('waiting for a connection')
-        connection, client_address = sock.accept()
-        try:
-            print('connection from', client_address)
-
-            # Receive the data in json format
-            data = receive_json(connection)
-            print('received {!r}'.format(data))
-
-            # Save the json packet to a file
-            filename = save_json(data)
-            print('saved to', filename)
-
-        finally:
-            # Clean up the connection
-            connection.close()
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass

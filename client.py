@@ -1,39 +1,45 @@
-# Sends random json packets to server over port 5000
+"""Sends random json packets to server over port 5000"""
 
 import socket
 import json
-import random
-import time
+from random import randint
+from time import time, sleep
+from typing import Dict, Any
+
+IP = "127.0.0.1"
+PORT = 5000
 
 
-def generate_json_packet():
-    # Generate random json packet with hashed data bits
+def generate_json_message():  # -> Dict[str, Any]:
+    """Generate random json packet with hashed data bits"""
     return {
-        "id": random.randint(1, 100),
-        "timestamp": time.time(),
-        "data": hash(str(random.randint(1, 100)))
+        "id": randint(1, 100),
+        "timestamp": time(),
+        "data": hash(str(randint(1, 100)))
     }
 
 
-# Send json packet to server
-def send_json_packet(sock, json_packet):
-    sock.send(json.dumps(json_packet).encode())
+def send_json_message(
+    sock: socket.socket,
+    json_message: Dict[str, Any],
+):  # -> None:
+    """Send json packet to server"""
+    message = (json.dumps(json_message) + '\n').encode()
+    sock.sendall(message)
+    print(f'{len(message)} bytes sent')
 
 
-ip = "127.0.0.1"
-port = "5000"
+def main():  # -> None
+    with socket.socket() as sock:
+        sock.connect((IP, PORT))
+        while True:
+            json_message = generate_json_message()
+            send_json_message(sock, json_message)
+            sleep(1)
 
 
 if __name__ == "__main__":
-    while True:
-        # Create socket
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Connect to server
-        sock.connect((ip, int(port)))
-
-        # Generate random json packet
-        json_packet = generate_json_packet()
-        # Send json packet to server
-        send_json_packet(sock, json_packet)
-        time.sleep(1)
-        sock.close()
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
