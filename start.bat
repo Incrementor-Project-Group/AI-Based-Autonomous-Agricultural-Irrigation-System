@@ -1,8 +1,3 @@
-@REM Option 1: start django server with webgui.py
-@REM Option 2: start django server with webgui.py and debug mode
-@REM Option 3: Add a new component with startapp
-
-
 @REM Echo all options
 @echo off
 @echo 1. Start django server with webgui.py
