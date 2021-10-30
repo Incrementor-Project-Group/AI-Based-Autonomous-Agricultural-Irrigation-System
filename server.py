@@ -1,6 +1,5 @@
 """
-Server-Side that receives json packets from client over the network using port
-5000. Then it saves the json packet to a file with the filename of current time.
+Server-Side that receives json packets from client over the network using port 5000.
 """
 import random
 import string
@@ -35,7 +34,6 @@ class DumpHandler(StreamRequestHandler):
                     break
                 print('received', data.decode().rstrip())
                 save_json(data)
-                # print 'received', parse_json_message(data)
                 print(parse_json_message(data))
         finally:
             print('disconnected from {}:{}'.format(*self.client_address))

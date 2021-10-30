@@ -1,6 +1,11 @@
 # Incrementor-Project
 
-Project that uses Raspberry PI's GPIO together with moisture sensor to feed information to display on WEB GUI.
+Project that uses Raspberry PI's GPIO together with moisture sensor to feed information to display on WEB GUI. CS - 530 Team 2 project work.
+
+## Setup
+
+1. Prepare your python 3.8 enviornment ([venv](https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/) if you want)
+2. `pip install django`
 
 ## Json packets testing
 
