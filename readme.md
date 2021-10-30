@@ -6,6 +6,7 @@ Project that uses Raspberry PI's GPIO together with moisture sensor to feed info
 
 1. Prepare your python 3.8 enviornment ([venv](https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/) if you want)
 2. `pip install django`
+3. Run `start.bat`
 
 ## Json packets testing
 
