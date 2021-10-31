@@ -2,3 +2,4 @@ venv
 secret.json
 gui\__pycache__
 *.json
+jsapproach

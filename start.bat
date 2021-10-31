@@ -4,7 +4,6 @@
 @echo 2. Start django server with webgui.py and debug mode
 @echo 3. Add a new component with startapp
 
-@REM Recieves the option as a parameter
 set /p option=Enter your option: 
 
 
