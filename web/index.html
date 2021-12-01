@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EEL Type</title>
+    <title>Plant Incrementor Project</title>
     <!-- Bootstrap -->
     <link rel="icon" href="images/favicon.svg" sizes="any" type="image/svg+xml">
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
@@ -19,31 +19,50 @@
 <body>
     <div id="nav-placeholder">
     </div>
-
-    <div class="container">
-        <div class="row  vertical-center">
-
-            <div class="col-md-12" style="margin: auto;">
-                <div class="card-body">
-                    <input type="text" id="data" class="form-control email" placeholder="Enter text">
-                    <div style="padding: 1ch;">
+    <section>
+        <div class="jumbotron text-center mt-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Plant Incrementor</h1>
+                        <button class="btn btn-primary" onclick="start_syncing()">Start
+                            Refreshing</button>
+                        <button class="btn btn-info" onclick="inject_hydrometer_for_plant()">Add another Plant</button>
+                        <button class="btn btn-danger" onclick="stop_syncing()">Stop Refreshing</button>
                     </div>
-                    <button class="btn btn-primary" onclick="generate_qrcode()">Button</button>
                 </div>
             </div>
+        </div>
+        <div class="container" id="plant_container">
+            <div class="row">
+                <div class="col-md-8 col-12" id="plant1container">
+                    <h2>Plant #1</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-12" id="plant1container"><span class="badge badge-warning"
+                                id="plant1warning" style="display:none;">Warning</span></div>
+                        <br />
+                    </div>
+                    <div class="progress" style="height: 50px;">
+                        <div class="progress-bar" id="progress1" role="progressbar" style="width: 50%"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                    </div>
 
-            <div style="display: block;margin-left: auto;margin-right: auto">
-                <!-- Centerized image with id="qr" style=" max-width: 300px; -->
-                <img id="qr" src="" alt="" style="max-width: 300px;">
+                </div>
+                <div class="col-md-4 col-12">
+                    <h2>Control Signals</h2>
+                    <button class="btn btn-primary" onclick="waters()">Waters 25ml</button>
+                    <button class="btn btn-primary" onclick="waters()">Waters 50ml</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.4.1.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap-4.4.1.js"></script>
+    </section>
 </body>
 
 </html>
