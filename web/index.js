@@ -64,7 +64,7 @@ function inject_hydrometer_for_plant(plant_name = plant_counts + 1) {
     plant += '    </div>'
     plant += '</div>'
     plant += '<div class="col-md-4 col-12">'
-    plant += '    <h2>&nbsp;</h2>'
+    plant += '    <h2>&nbsp;</h2><br />'
     plant += '    <button class="btn btn-primary" onclick="waters25' + '_' + String(plant_counts) + '()">Waters 25ml</button>'
     plant += '    <button class="btn btn-primary" onclick="waters50' + '_' + String(plant_counts) + '()">Waters 50ml</button>'
     plant += '     </div>'
