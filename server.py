@@ -9,10 +9,7 @@ from socketserver import StreamRequestHandler, TCPServer
 
 def save_json(data: bytes):
     """Saves json packets to file and name it with id"""
-    filename = ''.join(
-        random.choice(string.digits)
-        for _ in range(3)
-    ) + '.json'
+    filename = ''.join('current_status') + '.json'
     with open(filename, 'wb') as f:
         f.write(data)
     print('saved to', filename)
@@ -33,14 +30,14 @@ class DumpHandler(StreamRequestHandler):
                 if not data:
                     break
                 print('received', data.decode().rstrip())
-                save_json(data)
-                print(parse_json_message(data))
+                save_json(data)  # uncomment to save json packets as files
+                parse_json_message(data)
         finally:
             print('disconnected from {}:{}'.format(*self.client_address))
 
 
 def main():
-    server_address = ('localhost', 5000)
+    server_address = ('0.0.0.0', 5000)
     print('starting up on {}:{}'.format(*server_address))
     with TCPServer(server_address, DumpHandler) as server:
         print('waiting for a connection')

@@ -14,10 +14,11 @@ function generate_qrcode() {
     eel.generate_qrcode(data)(generate_image);
 }
 
-function update_hydrometer() {
+async function update_hydrometer() {
     // Get the value from the input field
     pg = document.getElementById("progress1");
-    v = Math.round(Math.random() * 100);
+    // Update the progress bar with eel function get_hydrometer_value() by setting v with the value returned from eel
+    let v = await eel.get_hydrometer_value()();
     pg.value = v;
     pg.style = "width: " + v + "%";
     pg.innerHTML = v + "%";

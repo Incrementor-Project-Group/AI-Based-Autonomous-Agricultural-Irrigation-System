@@ -2,6 +2,7 @@ import eel
 import pyqrcode
 from io import BytesIO
 from base64 import b64encode
+import json
 import gpiozero
 from gpiozero.pins.pigpio import PiGPIOFactory
 # Initialize the app
@@ -9,7 +10,7 @@ eel.init('web', allowed_extensions=['.js', '.html'])
 
 # eel.start('index.html', size=(800, 600), mode='chrome-app')
 
-gpio = PiGPIOFactory(host='192.168.2.203')
+# gpio = PiGPIOFactory(host='192.168.2.203')
 
 
 @eel.expose
@@ -34,6 +35,19 @@ def main():
     eel.start('index.html', size=(1200, 800))
     while True:
         eel.sleep(1)
+
+
+def normalize(value):
+    return min(int(value * 2), 100)
+
+
+@ eel.expose
+def get_hydrometer_value():
+    # Read from file current_status.json and return the data
+    with open('current_status.json', 'r') as f:
+        data = json.load(f)
+        print(normalize(data.get('data')))
+        return normalize(data.get('data'))
 
 
 if __name__ == '__main__':

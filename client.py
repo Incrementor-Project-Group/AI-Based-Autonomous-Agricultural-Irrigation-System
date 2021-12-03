@@ -34,10 +34,8 @@ def send_json_message(
 def main(data=None):  # -> None
     with socket.socket() as sock:
         sock.connect((IP, PORT))
-        while True:
-            json_message = generate_json_message(data)
-            send_json_message(sock, json_message)
-            sleep(1)
+        json_message = generate_json_message(data)
+        send_json_message(sock, json_message)
 
 
 if __name__ == "__main__":

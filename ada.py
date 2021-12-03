@@ -22,5 +22,7 @@ mcp = MCP.MCP3008(spi, cs)
 chan = AnalogIn(mcp, MCP.P0)
 
 while True:
-    client.main((1-chan.value/CHANMAXV)*100)
+    hydration = (1-chan.value/CHANMAXV)*100
+    print(hydration)
+    client.main(hydration)
     time.sleep(1)
