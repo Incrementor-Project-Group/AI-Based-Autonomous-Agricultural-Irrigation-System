@@ -2,11 +2,14 @@ import eel
 import pyqrcode
 from io import BytesIO
 from base64 import b64encode
-
+import gpiozero
+from gpiozero.pins.pigpio import PiGPIOFactory
 # Initialize the app
 eel.init('web', allowed_extensions=['.js', '.html'])
 
 # eel.start('index.html', size=(800, 600), mode='chrome-app')
+
+gpio = PiGPIOFactory(host='192.168.2.203')
 
 
 @eel.expose
