@@ -10,6 +10,8 @@
     <link rel="icon" href="images/favicon.svg" sizes="any" type="image/svg+xml">
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="index.js"></script>
     <script src="/eel.js"></script>
@@ -19,6 +21,8 @@
 <body>
     <div id="nav-placeholder">
     </div>
+    <!-- <a class="github-fork-ribbon" href="https://github.com/Incrementor-Project-Group/Incrementor-Project"
+        data-ribbon="Source Code on GitHub" title="Source Code on GitHub">Source Code on GitHub</a> -->
     <section>
         <div class="jumbotron text-center mt-2">
             <div class="container">
@@ -27,7 +31,7 @@
                         <h1>Plant Incrementor</h1>
                         <button class="btn btn-primary" onclick="start_syncing()">Start
                             Refreshing</button>
-                        <button class="btn btn-info" onclick="inject_hydrometer_for_plant()">Add another Plant</button>
+                        <!-- <button class="btn btn-info" onclick="inject_hydrometer_for_plant()">Add another Plant</button> -->
                         <button class="btn btn-danger" onclick="stop_syncing()">Stop Refreshing</button>
                     </div>
                 </div>
@@ -35,7 +39,7 @@
         </div>
         <div class="container" id="plant_container">
             <div class="row">
-                <div class="col-md-8 col-12" id="plant1container">
+                <div class="col-md-7 col-12" id="plant1container">
                     <h2>Plant #1</h2>
                     <div class="row">
                         <div class="col-md-8 col-12" id="plant1container"><span class="badge badge-warning"
@@ -48,11 +52,36 @@
                     </div>
 
                 </div>
-                <div class="col-md-4 col-12">
+                <div class="col-md-5 col-12">
                     <h2>Control Signals</h2>
                     <br />
-                    <button class="btn btn-primary" onclick="waters()">Waters 25ml</button>
-                    <button class="btn btn-primary" onclick="waters()">Waters 50ml</button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Waters 25ml</button>
+                        <button onclick="show_video_feed()" type=" button" class="btn btn-secondary">Camera
+                            Feed</button>
+                        <button type="button" class="btn btn-secondary">Settings</button>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="smart1">
+                        <label class="custom-control-label" for="smart1">Smart Watering</label>
+                    </div>
+                </div>
+                <style>
+                    #container {
+                        margin: 0px auto;
+                        width: 500px;
+                        height: 375px;
+                        border: 10px #333 solid;
+                    }
+
+                    #videoElement {
+                        width: 480px;
+                        height: 355px;
+                        background-color: #666;
+                    }
+                </style>
+                <div id="video-container" style="padding: 20px;">
+
                 </div>
             </div>
         </div>

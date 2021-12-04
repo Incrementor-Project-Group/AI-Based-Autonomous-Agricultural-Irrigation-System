@@ -32,7 +32,7 @@ async function update_hydrometer() {
     }
 }
 
-var t = None;
+var t = '';
 var is_running = false;
 
 function start_syncing() {
@@ -52,11 +52,23 @@ function stop_syncing() {
 
 var plant_counts = 2;
 
+var show_video_feed_bool = false;
+
+function show_video_feed() {
+    if (!show_video_feed_bool) {
+        $("#video-container").load("include/video.html");
+    } else {
+        document.getElementById("video-container").innerHTML = "";
+    }
+    show_video_feed_bool = !show_video_feed_bool;
+}
+
+
 function inject_hydrometer_for_plant(plant_name = plant_counts + 1) {
     plant_counts += 1;
     var plant = ''
     plant += '<div class="row">'
-    plant += '<div class="col-md-8 col-12">'
+    plant += '<div class="col-md-6 col-12">'
     plant += '    <h2>Plant ' + String(plant_name) + '</h2>'
     plant += '<div class="row"><div class="col-md-8 col-12" id="plant1container"><span class="badge badge-warning"id="plant1warning" style="display:none;">Warning</span></div><br /></div>'
     plant += '    <div class="progress" style="height: 50px;">'
@@ -64,10 +76,13 @@ function inject_hydrometer_for_plant(plant_name = plant_counts + 1) {
     plant += '  aria-valuemin="0" aria-valuemax="100">50%</div>'
     plant += '    </div>'
     plant += '</div>'
-    plant += '<div class="col-md-4 col-12">'
+    plant += '<div class="col-md-6 col-12">'
     plant += '    <h2>&nbsp;</h2><br />'
     plant += '    <button class="btn btn-primary" onclick="waters25' + '_' + String(plant_counts) + '()">Waters 25ml</button>'
     plant += '    <button class="btn btn-primary" onclick="waters50' + '_' + String(plant_counts) + '()">Waters 50ml</button>'
+    plant += '  <div class="custom-control custom-switch">'
+    plant += '<input type="checkbox" class="custom-control-input" id="customSwitch1">'
+    plant += '<label class="custom-control-label" for="customSwitch1">Toggle this switch element</label></div>'
     plant += '     </div>'
     plant += ' </div>'
     document.getElementById("plant_container").innerHTML += plant;

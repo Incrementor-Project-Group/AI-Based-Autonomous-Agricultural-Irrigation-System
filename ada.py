@@ -1,3 +1,7 @@
+"""
+Used on the raspberry pi to control the adafruit MCP 3008.
+Then sends the data to the server via the socket.
+"""
 import busio
 import digitalio
 import board

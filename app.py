@@ -1,3 +1,10 @@
+"""
+Main module initializer.
+
+    Returns:
+        [type]: [description]
+"""
+
 import eel
 import pyqrcode
 from io import BytesIO
