@@ -14,6 +14,11 @@ function generate_qrcode() {
     eel.generate_qrcode(data)(generate_image);
 }
 
+function play_single_sound() {
+    var audio = new Audio('audio/alarm.mp3');
+    document.getElementById('cry').play();
+}
+
 async function update_hydrometer() {
     // Get the value from the input field
     pg = document.getElementById("progress1");
@@ -25,6 +30,7 @@ async function update_hydrometer() {
     if (v < 20) {
         document.getElementById("plant1warning").style = "";
         pg.style.backgroundColor = "red";
+        play_single_sound();
     }
     if (v > 20) {
         document.getElementById("plant1warning").style = "display:none;";
